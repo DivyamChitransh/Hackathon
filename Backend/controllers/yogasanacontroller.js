@@ -11,6 +11,19 @@ const createyoga =async(req,res) => {
     }
 };
 
+const getAsanas = async(req,res) => {
+    try{
+        const yogasana = await Yogasana.find();
+        if(!yogasana){
+            return res.status(404).json({message:'Yogasana not found'})
+        }
+        res.status(200).json(yogasana);
+    }
+    catch(error){
+        res.status(500).json({error:'Server failed'})
+    }
+}
+
 const rateasana = async(req,res) => {
     try{
         const {asanaId} = req.params;
@@ -31,4 +44,4 @@ const rateasana = async(req,res) => {
     }
 }
 
-module.exports = {createyoga,rateasana};
+module.exports = {createyoga,rateasana,getAsanas};

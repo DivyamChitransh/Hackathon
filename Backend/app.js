@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const userroutes = require('./routes/userroutes.js');
 const yogroutes = require('./routes/asanaroutes.js');
 
@@ -9,6 +10,7 @@ const PORT = 4000;
 
 mongoose.connect('mongodb://localhost:27017/YogDB').then(() => console.log('Database Connected')).catch(err => console.log('Unable to connect DB',err));
 
+app.use(cors({origin:'http://localhost:3000'}));
 app.use('/users',userroutes);
 app.use('/yogasanas',yogroutes)
 
